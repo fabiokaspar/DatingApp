@@ -21,7 +21,7 @@ namespace DatingApp.API.Controllers
             this._repo = repo;
         }
 
-        [HttpGet("all")]
+        [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
             var users = await _repo.GetUsers();
