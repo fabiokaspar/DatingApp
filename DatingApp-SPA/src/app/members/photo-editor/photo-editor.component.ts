@@ -52,7 +52,7 @@ export class PhotoEditorComponent implements OnInit {
     };
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
-      if (response) 
+      if (response)
       {
         const res: Photo = JSON.parse(response);
         const photo = {
@@ -63,8 +63,14 @@ export class PhotoEditorComponent implements OnInit {
           isMain: res.isMain
         };
         this.photos.push(photo);
+
+        if (photo.isMain) {
+          this.authService.changeMemberPhoto(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
+        }
       }
-    };  
+    };
   }
 
   setMainPhoto(photo: Photo) {

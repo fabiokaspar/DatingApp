@@ -25,7 +25,7 @@ export class AuthService {
   }
 
 
-  login(model: any) {
+  login(model: User) {
     return this.http.post(this.baseUrl+'login', model)
       .pipe(
         map((response: any) => {
@@ -41,8 +41,8 @@ export class AuthService {
       )
   }
 
-  register(model: any) {
-    return this.http.post(this.baseUrl+'register', model);
+  register(user: User) {
+    return this.http.post(this.baseUrl+'register', user);
   }
 
   loggedIn() {

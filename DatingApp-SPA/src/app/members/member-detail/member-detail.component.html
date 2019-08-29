@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{user?.photoUrl}}" alt="{{user?.knownAs}}">
+        <img class="card-img-top img-thumbnail" src="{{user?.photoUrl || '/assets/user.png' }}" alt="{{user?.knownAs}}">
         <div class="card-body">
           <div>
             <strong>Location:</strong>
@@ -16,12 +16,12 @@
             <strong>Age:</strong>
             <p>{{user?.age}}</p>
           </div>
-          
+
           <div>
             <strong>Last active:</strong>
             <p>{{user?.lastActive}}</p>
           </div>
-          
+
           <div>
             <strong>Member since:</strong>
             <p>{{user?.created}}</p>
@@ -41,17 +41,41 @@
       <div class="tab-panel">
         <tabset class="member-tabset">
           <tab heading="About {{user?.knownAs}}">
-            <h4>Description</h4>
-            <p>{{user?.introduction}}</p>
-            <h4>Looking For</h4>
-            <p>{{user?.lookingFor}}</p>
+            <div *ngIf="user.introduction !== null" else #noIntroduction>
+              <h4>Description</h4>
+              <p>{{user.introduction}}</p>
+            </div>
+            <div #noIntroduction>
+              <h4>Description</h4>
+              <p class="noInfo">No info has been added</p>
+            </div>
+
+            <div *ngIf="user.lookingFor !== null" else #noLookingFor>
+              <h4>Looking For</h4>
+              <p>{{user.lookingFor}}</p>
+            </div>
+            <div #noLookingFor>
+              <h4>Looking For</h4>
+              <p class="noInfo">No info has been added</p>
+            </div>
           </tab>
           <tab heading="Interests">
-            <h4>Interests</h4>
-            <p>{{user?.interests}}</p>
+            <div *ngIf="user.interests !== null" else #noInterests>
+              <h4>Interests</h4>
+              <p>{{user.interests}}</p>
+            </div>
+            <div #noInterests>
+              <h4>Interests</h4>
+              <p class="noInfo">No info has been added</p>
+            </div>
           </tab>
           <tab heading="Photos">
-            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+            <ngx-gallery *ngIf="galleryImages.length" else #noPhotos [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+            
+            <div #noPhotos>
+                <h4>Photos</h4>
+                <p class="noInfo">No photo has been added </p>
+            </div>
           </tab>
           <tab heading="Messages">
             <p>Messages will go here</p>

@@ -13,3 +13,8 @@
     background-color: #fff;
     border-top: none;
 }
+
+p.noInfo {
+    color: darkgray;
+    font-style: oblique;
+}
