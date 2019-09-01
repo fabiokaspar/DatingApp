@@ -10,7 +10,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -77,7 +78,9 @@ export function attachToken() {
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
       }),
-      TabsModule.forRoot()
+      TabsModule.forRoot(),
+      ButtonsModule.forRoot(),
+      PaginationModule.forRoot()
    ],
    providers: [
       AuthService,
