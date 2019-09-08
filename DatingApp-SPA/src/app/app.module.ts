@@ -20,6 +20,7 @@ import { RegisterComponent } from './register/register.component';
 import { MembersComponent } from './members/members.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
@@ -39,6 +40,7 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { ListsResolver } from './_resolvers/lists.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 export function attachToken() {
    return localStorage.getItem('token');
@@ -58,6 +60,7 @@ export function attachToken() {
       ListsComponent,
       MessagesComponent,
       PhotoEditorComponent,
+      MemberMessagesComponent,
       TimeAgoPipe
    ],
    imports: [
@@ -93,7 +96,8 @@ export function attachToken() {
       MemberDetailResolver,
       MemberListResolver,
       MemberEditResolver,
-      ListsResolver
+      ListsResolver,
+      MessagesResolver
    ],
    bootstrap: [
       AppComponent

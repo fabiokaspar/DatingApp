@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     // this.registerForm = new FormGroup({
     //   username: new FormControl('', Validators.required),
-    //   password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
+    //   password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
     //   confirmPassword: new FormControl('', Validators.required)
     // }, this.passwordMatchValidator);
     this.bsConfig = {
@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
       dateOfBirth: [null, Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       confirmPassword: ['', Validators.required]
     }, {
       validator: this.passwordMatchValidator

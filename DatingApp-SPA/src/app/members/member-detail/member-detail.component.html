@@ -31,7 +31,7 @@
         <div class="card-footer">
           <div class="btn-group d-flex">
             <button class="btn btn-primary w-100">Like</button>
-            <button class="btn btn-success w-100">Message</button>
+            <button class="btn btn-success w-100" (click)="selectTab(3)">Message</button>
           </div>
         </div>
 
@@ -39,46 +39,59 @@
     </div>
     <div class="col-sm-8">
       <div class="tab-panel">
-        <tabset class="member-tabset">
+        <tabset class="member-tabset" #memberTabs>
           <tab heading="About {{user?.knownAs}}">
+            
             <div *ngIf="user.introduction !== null" else #noIntroduction>
               <h4>Description</h4>
               <p>{{user.introduction}}</p>
             </div>
-            <div #noIntroduction>
-              <h4>Description</h4>
-              <p class="noInfo">No info has been added</p>
-            </div>
+
+            <ng-template #noIntroduction>
+              <div>
+                <h4>Description</h4>
+                <p class="noInfo">No info has been added</p>
+              </div>
+            </ng-template>
 
             <div *ngIf="user.lookingFor !== null" else #noLookingFor>
               <h4>Looking For</h4>
               <p>{{user.lookingFor}}</p>
             </div>
-            <div #noLookingFor>
-              <h4>Looking For</h4>
-              <p class="noInfo">No info has been added</p>
-            </div>
+
+            <ng-template #noLookingFor>
+              <div>
+                <h4>Looking For</h4>
+                <p class="noInfo">No info has been added</p>
+              </div>
+            </ng-template>
+            
           </tab>
           <tab heading="Interests">
             <div *ngIf="user.interests !== null" else #noInterests>
               <h4>Interests</h4>
               <p>{{user.interests}}</p>
             </div>
-            <div #noInterests>
-              <h4>Interests</h4>
-              <p class="noInfo">No info has been added</p>
-            </div>
+            
+            <ng-template #noInterests>
+              <div>
+                <h4>Interests</h4>
+                <p class="noInfo">No info has been added</p>
+              </div>
+            </ng-template>  
           </tab>
           <tab heading="Photos">
             <ngx-gallery *ngIf="galleryImages.length" else #noPhotos [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
             
-            <div #noPhotos>
+            <ng-template #noPhotos>
+              <div>
                 <h4>Photos</h4>
                 <p class="noInfo">No photo has been added </p>
-            </div>
+              </div>
+            </ng-template>
           </tab>
           <tab heading="Messages">
-            <p>Messages will go here</p>
+            <app-member-messages [recipientId]="user.id"></app-member-messages>
           </tab>
         </tabset>
       </div>
