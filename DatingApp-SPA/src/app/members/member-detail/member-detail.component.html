@@ -42,7 +42,7 @@
         <tabset class="member-tabset" #memberTabs>
           <tab heading="About {{user?.knownAs}}">
             
-            <div *ngIf="user.introduction !== null" else #noIntroduction>
+            <div *ngIf="user.introduction !== null; else noIntroduction">
               <h4>Description</h4>
               <p>{{user.introduction}}</p>
             </div>
@@ -54,7 +54,7 @@
               </div>
             </ng-template>
 
-            <div *ngIf="user.lookingFor !== null" else #noLookingFor>
+            <div *ngIf="user.lookingFor !== null; else noLookingFor">
               <h4>Looking For</h4>
               <p>{{user.lookingFor}}</p>
             </div>
@@ -68,7 +68,7 @@
             
           </tab>
           <tab heading="Interests">
-            <div *ngIf="user.interests !== null" else #noInterests>
+            <div *ngIf="user.interests !== null; else noInterests">
               <h4>Interests</h4>
               <p>{{user.interests}}</p>
             </div>
@@ -81,7 +81,7 @@
             </ng-template>  
           </tab>
           <tab heading="Photos">
-            <ngx-gallery *ngIf="galleryImages.length" else #noPhotos [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+            <ngx-gallery *ngIf="galleryImages.length; else noPhotos" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
             
             <ng-template #noPhotos>
               <div>

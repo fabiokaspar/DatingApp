@@ -32,7 +32,12 @@ export class MemberMessagesComponent implements OnInit {
         tap(messages => {
           for (let i = 0; i < messages.length; i++) {
             if (!messages[i].isRead && messages[i].recipientId === currentUserId) {
-              this.userService.markAsRead(currentUserId, messages[i].id);
+              this.userService.markAsRead(currentUserId, messages[i].id).subscribe(
+                res => {
+                  console.log('marking messages as read');
+                }, 
+                error => console.log(error)
+              );
             }
           }
         })

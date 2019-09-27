@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // template forms and reactive forms
-import { BsDropdownModule, BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDropdownModule, BsDatepickerModule, ModalModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -26,21 +26,28 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
 import { UserService } from './_services/User.service';
+import { AdminService } from './_services/admin.service';
 
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
+import { HasRoleDirective } from './_directives/hasRole.directive';
+
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 
 export function attachToken() {
    return localStorage.getItem('token');
@@ -61,7 +68,12 @@ export function attachToken() {
       MessagesComponent,
       PhotoEditorComponent,
       MemberMessagesComponent,
-      TimeAgoPipe
+      AdminPanelComponent,
+      UserManagementComponent,
+      PhotoManagementComponent,
+      RolesModalComponent,
+      TimeAgoPipe,
+      HasRoleDirective
    ],
    imports: [
       BrowserModule,
@@ -75,6 +87,7 @@ export function attachToken() {
       RouterModule.forRoot(appRoutes),
       NgxGalleryModule,
       FileUploadModule,
+      ModalModule.forRoot(),
       JwtModule.forRoot({
          config: {
             tokenGetter: attachToken,
@@ -90,6 +103,7 @@ export function attachToken() {
       AuthService,
       AlertifyService,
       UserService,
+      AdminService,
       ErrorInterceptorProvider,
       AuthGuard,
       PreventUnsavedChanges,
@@ -98,6 +112,9 @@ export function attachToken() {
       MemberEditResolver,
       ListsResolver,
       MessagesResolver
+   ],
+   entryComponents: [
+      RolesModalComponent
    ],
    bootstrap: [
       AppComponent

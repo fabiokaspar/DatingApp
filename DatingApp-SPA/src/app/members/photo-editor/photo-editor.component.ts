@@ -55,12 +55,14 @@ export class PhotoEditorComponent implements OnInit {
       if (response)
       {
         const res: Photo = JSON.parse(response);
+        // debugger;
         const photo = {
           id: res.id,
           url: res.url,
           dateAdded: res.dateAdded,
           description: res.description,
-          isMain: res.isMain
+          isMain: res.isMain,
+          isApproved: res.isApproved
         };
         this.photos.push(photo);
 
